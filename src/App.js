@@ -1,26 +1,21 @@
 import React, { Component } from 'react';
 import Modal from './components/Modal';
-import { Provider } from 'react-redux';
-import store from './store';
+
+import { connect } from 'react-redux';
+import { showModal } from './actions/modalAction';
 
 class App extends Component {
-  state = { show: false };
-
-  showModal = () => {
-    this.setState({ show: true });
-  };
   render() {
     return (
-      <Provider store={store}>
-        <div>
-          {
-            this.state.show ? <Modal /> : null
-          }
-          <button style={styles.button} type="button" onClick={this.showModal}>
-            Open
+      <div>
+        <p>result: {this.props.counter}</p>
+        {
+          this.props.visible ? <Modal /> : null
+        }
+        <button style={styles.button} type="button" onClick={this.props.showModal}>
+          Open
           </button>
-        </div>
-      </Provider>
+      </div>
     );
   }
 }
@@ -28,7 +23,6 @@ class App extends Component {
 const styles = {
   button: {
     backgroundColor: '#2772b8',
-    margin: 10,
     padding: 10,
     color: 'white',
     borderRadius: 5,
@@ -37,4 +31,8 @@ const styles = {
   }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  visible: state.visible,
+  counter: state.counter,
+})
+export default connect(mapStateToProps, { showModal })(App);
