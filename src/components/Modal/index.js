@@ -6,14 +6,18 @@ class Modal extends Component {
     }
 
     minus = () => {
-        this.setState({
-            value: this.state.value - 1,
-        })
+        if (this.state.value > 1) {
+            this.setState({
+                value: this.state.value - 1,
+            })
+        }
     }
     add = () => {
-        this.setState({
-            value: this.state.value + 1,
-        })
+        if (this.state.value < 10) {
+            this.setState({
+                value: this.state.value + 1,
+            })
+        }
     }
     render() {
         return (
