@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import Modal from './components/Modal';
+import { Provider } from 'react-redux';
+import store from './store';
 
 class App extends Component {
   state = { show: false };
@@ -9,14 +11,16 @@ class App extends Component {
   };
   render() {
     return (
-      <div>
-        {
-          this.state.show ? <Modal /> : null
-        }
-        <button style={styles.button} type="button" onClick={this.showModal}>
-          Open
-        </button>
-      </div>
+      <Provider store={store}>
+        <div>
+          {
+            this.state.show ? <Modal /> : null
+          }
+          <button style={styles.button} type="button" onClick={this.showModal}>
+            Open
+          </button>
+        </div>
+      </Provider>
     );
   }
 }
